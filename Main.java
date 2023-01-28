@@ -1,76 +1,35 @@
-package hw1;
-    import java.util.Arrays;
-    import java.util.Random;
-    import java.util.Scanner;
+package hw2;
+
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Main {
-
     public static void main(String[] args) {
-        findMinMax();
-        isItLeapYear();
-        sortArr();
+        // Задача про палиндром
+        //System.out.println(isPalindrome("Madam, I'm Adam!")); // true
+
+        // Генерация строки и запись в файл
+        generatingStringAndWritingFile("TEST", 100);
     }
-    public static void findMinMax (){
-        int[] arr = new int[]{5, 13, 1, 0, 4, 4, 9, 7};
-        int max = arr[0];
-        int min = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] > max){
-                max = arr[i];
-            }
-            if (arr[i] < min){
-                min = arr[i];
-            }
+    public static boolean isPalindrome(String text) {
+        String clean = text.replaceAll("\\W", "").toLowerCase();
+        StringBuilder plain = new StringBuilder(clean);
+        StringBuilder reverse = plain.reverse();
+        return (reverse.toString()).equals(clean);
+    }
+    public static void generatingStringAndWritingFile(String text, int n) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.valueOf(text).repeat(Math.max(0, n)));
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("test.txt");
+            fileOutputStream.write(stringBuilder.toString().getBytes());
+            fileOutputStream.close();
+        } catch (IOException e) {
+            System.out.println("Проблема вывода!");
+            e.printStackTrace();
         }
-        System.out.println(max);
-        System.out.println(min);
     }
 
-    public static void isItLeapYear() {
-        Scanner in = new Scanner(System.in);
-        System.out.print("Введите год: ");
-        int year = in.nextInt();
-        boolean leapYear = false;
-        if (year % 4 == 0) {
-            leapYear = true;
-            if (year % 100 == 0) {
-                if (year % 400 == 0)
-                    leapYear = true;
-                else
-                    leapYear = false;
-            }
-        }
-        else
-            leapYear = false;
-        System.out.println(leapYear);
-    }
-
-    public static void sortArr() {
-        int[] arr = new int[10];
-        int val = 3;
-        Random random = new Random();
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = random.nextInt(4);
-        }
-        System.out.println(Arrays.toString(arr));
-        int i = 0;
-        int j = arr.length - 1;
-        while (i < j) {
-            if (arr[i] != val) {
-                i++;
-            }
-            if (arr[j] == val) {
-                j--;
-            }
-            if (arr[i] == val) {
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-                i++;
-                j--;
-            }
-        }
-        System.out.println(Arrays.toString(arr));
-    }
 
 }
