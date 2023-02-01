@@ -7,7 +7,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         // Задача про палиндром
-        //System.out.println(isPalindrome("Madam, I'm Adam!")); // true
+        System.out.println(isPalindrome("Madam, I'm Adam!")); // true
 
         // Генерация строки и запись в файл
         generatingStringAndWritingFile("TEST", 100);
